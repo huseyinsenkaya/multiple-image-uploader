@@ -1,0 +1,76 @@
+<!-- section -->
+<section class="section my-4">
+  <div class="container text-center">
+    <div class="title py-5">
+      <h1>Multiple Image Uploader</h1>
+      <p class="subtitle">Upload Images to the <strong>Server</strong></p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <form
+          action="/uploadMultiple"
+          enctype="multipart/form-data"
+          method="POST"
+        >
+          <div class="row">
+            <div class="col">
+              <input
+                type="file"
+                class="form-control"
+                name="images"
+                id="formFile"
+                multiple
+              />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <input
+                type="submit"
+                class="btn btn-primary"
+                value="Upload Images"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Display Images -->
+    <section class="mt-5"></section>
+    <div class="row">
+      <% images.forEach((img)=>{ %> <% if(img.imageBase64) { %>
+      <!-- Bootstrap Card -->
+      <div class="col-3 mb-3">
+        <div class="card shadow" style="width: 18rem">
+          <img
+            src="data:<%= img.contentType %>;base64,<%= img.imageBase64 %>"
+            class="card-img-top img-fluid"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title font-poppins">UI/UX Design</h5>
+            <p class="text-secondary font-size-09">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio
+              architecto minima quia maxime excepturi nemo qui, reiciendis
+              fugit.
+            </p>
+            <form action="/removeImage" method="POST">
+              <input type="hidden" name="removedFileName" value="<%= img.fileName %>">
+              <button
+                type="submit"
+                name="removeImage"
+                class="btn btn-danger"
+                value="<%= img._id %>"
+              >
+                Remove
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %> <% }) %>
+    </div>
+  </div>
+</section>

@@ -2,9 +2,6 @@
 
 This is a simple web app for uploading images to database or removing from it.
 
-## Preview
-![me](media/imgUpl.gif)
-
 ## Built With
 
 - Node.js
